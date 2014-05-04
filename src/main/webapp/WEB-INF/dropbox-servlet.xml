@@ -9,6 +9,14 @@
  
   <context:component-scan base-package="edu.harvard.dropbox.controllers" />
   
+  <bean id="monitor" class="edu.harvard.dropbox.utils.MonitoringSubsystemImpl"/>
+  <bean id="httputils" class="edu.harvard.dropbox.utils.HttpUtils">
+    <constructor-arg ref="monitor"/>  
+  </bean>
+  <bean id="downloadController" class="edu.harvard.dropbox.controllers.DownloadController">
+    <constructor-arg ref="httputils"/>
+  </bean>
+ 
   <bean
     class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     <property name="prefix">
